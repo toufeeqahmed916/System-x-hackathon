@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: "Hanken Grotesk", sans-serif;
+    background-color: #0a0a0a;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: #c6ff00;
+    color: #000;
+  }
+  /* thin lime scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border: 2px solid #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c6ff00;
+  }
+}
+
+@layer components {
+  /* Neo-brutalist building blocks, shared across sections */
+  .brutal-border {
+    border: 3px solid #c6ff00;
+  }
+  .brutal-border-white {
+    border: 3px solid #ffffff;
+  }
+  .brutal-shadow {
+    box-shadow: 6px 6px 0 0 #c6ff00;
+  }
+  .brutal-shadow-white {
+    box-shadow: 6px 6px 0 0 #ffffff;
+  }
+  .brutal-shadow-black {
+    box-shadow: 6px 6px 0 0 #000000;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-lime text-black font-display font-bold uppercase tracking-tight px-8 py-4 border-[3px] border-black transition-transform duration-150 ease-out;
+    box-shadow: 6px 6px 0 0 #000000;
+  }
+  .btn-primary:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0 0 #000000;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-black text-lime font-display font-bold uppercase tracking-tight px-8 py-4 border-[3px] border-lime transition-transform duration-150 ease-out;
+    box-shadow: 6px 6px 0 0 #c6ff00;
+  }
+  .btn-secondary:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0 0 #c6ff00;
+  }
+  .section-title {
+    @apply font-display text-4xl md:text-6xl font-bold uppercase tracking-tight text-white;
+  }
+  .eyebrow {
+    @apply font-mono text-xs md:text-sm tracking-[0.2em] text-lime;
+  }
+}
+
+@layer utilities {
+  .text-stroke-lime {
+    -webkit-text-stroke: 2px #c6ff00;
+    color: transparent;
+  }
+}
