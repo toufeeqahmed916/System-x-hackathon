@@ -1,9 +1,6 @@
 import { EVENT } from "../config/event";
 
 export default function Header() {
-  const scrollToRegister = () => {
-    document.getElementById("register")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background border-b-[3px] border-lime shadow-[0_6px_0_0_rgba(198,255,0,0.15)]">
@@ -31,10 +28,6 @@ export default function Header() {
             </a>
           ))}
         </nav>
-
-        <button onClick={scrollToRegister} className="btn-primary !px-5 !py-2.5 !text-sm">
-          Register
-        </button>
       </div>
     </header>
   );
