@@ -15,7 +15,7 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-8">
           {[
             ["About", "#about"],
-            ["Prizes", "#prizes"],
+            ["Winners", "#winners"],
             ["Timeline", "#how-it-works"],
             ["FAQ", "#faq"],
           ].map(([label, href]) => (

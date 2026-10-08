@@ -34,3 +34,34 @@ export const EVENT = {
     third: "Rs. 4,000",
   },
 };
+
+// ---------------------------------------------------------------------------
+// WINNERS — fill in real team names, members, photo filenames and demo links.
+// Keep the order: 1st, 2nd, 3rd.
+// ---------------------------------------------------------------------------
+export const WINNERS = [
+  {
+    place: "1st Place",
+    prize: EVENT.prizes.first,
+    teamName: "Claude's Plan",
+    members: ["Umer Qureshi", "Musab Khan", "Oun Jaffri", "Hunain Shaikh"],
+    photo: "/winners/1st.jpg",
+    demoUrl: "https://bedgrid-six.vercel.app/",
+  },
+  {
+    place: "2nd Place",
+    prize: EVENT.prizes.second,
+    teamName: "Code Crusaders",
+    members: ["Syed Sayeel Abbas", "Ahmed Memon", "Rasool Bux", "Haroon Zulifqar"],
+    photo: "/winners/2nd.jpg",
+    demoUrl: "https://smart-campus-network-monitoring.netlify.app/",
+  },
+  {
+    place: "3rd Place",
+    prize: EVENT.prizes.third,
+    teamName: "Lahooti X",
+    members: ["Amjad", "Naveed", "Muhammad Azan"],
+    photo: "/winners/3rd.JPG",
+    demoUrl: "https://queueflow10.vercel.app/",
+  },
+];
