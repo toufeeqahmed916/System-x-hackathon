@@ -16,18 +16,14 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
-  const scrollToRegister = () => {
-    document.getElementById("register")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section id="top" className="relative border-b-[3px] border-lime overflow-hidden">
       <div className="relative px-mobile-margin md:px-desktop-margin pt-14 md:pt-20 pb-0 max-w-7xl mx-auto">
         <div className="inline-flex items-center gap-2 border-[2px] border-lime bg-black px-3 py-1.5">
           <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />
           <span className="font-mono text-[11px] md:text-xs tracking-[0.2em] text-lime uppercase">
-            Registrations Closed
-          </span>
+  Event Concluded
+</span>
         </div>
 
         <div ref={headlineRef} className="mt-6 md:mt-8">
@@ -76,7 +72,7 @@ export default function Hero() {
                   key={j}
                   className="font-mono font-bold text-black text-sm md:text-base uppercase tracking-widest mx-6"
                 >
-                  1st OCT 2026  ★  AI Tools Allowed  ★
+                  Hackathon 1.0 — Completed  ★  Thank You For Building  ★  See You Next Time  ★
                 </span>
               ))}
             </div>
