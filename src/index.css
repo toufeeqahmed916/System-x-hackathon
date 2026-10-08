@@ -80,4 +80,10 @@
     -webkit-text-stroke: 2px #c6ff00;
     color: transparent;
   }
+    .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -65,3 +65,37 @@ export const WINNERS = [
     demoUrl: "https://queueflow10.vercel.app/",
   },
 ];
+
+// ---------------------------------------------------------------------------
+// TESTIMONIALS: typed reviews, one entry per team. Write the real text here.
+// ---------------------------------------------------------------------------
+export const TESTIMONIALS = [
+  { team: "Claudes PLan", text: "Type the review exactly as the team wrote it." },
+  { team: "Yaqeen", text: "Type the review exactly as the team wrote it." },
+  { team: "bakri", text: "Type the review exactly as the team wrote it." },
+  { team: "bakri", text: "Type the review exactly as the team wrote it." },
+  { team: "bakri", text: "Type the review exactly as the team wrote it." },
+  { team: "bakri", text: "Type the review exactly as the team wrote it." },
+  { team: "bakri", text: "Type the review exactly as the team wrote it." },
+  { team: "bakri", text: "Type the review exactly as the team wrote it." },
+  { team: "bakri", text: "Type the review exactly as the team wrote it." },
+];
+
+// ---------------------------------------------------------------------------
+// STICKY_NOTES: anonymous note photos, no names. Just the file paths.
+// ---------------------------------------------------------------------------
+export const STICKY_NOTES = [
+  "/sticky-notes/note-1.jpg",
+  "/sticky-notes/note-2.jpg",
+  "/sticky-notes/note-3.jpg",
+  "/sticky-notes/note-4.jpg",
+  "/sticky-notes/note-5.jpg",
+  "/sticky-notes/note-6.jpg",
+  "/sticky-notes/note-6.jpg",
+  "/sticky-notes/note-6.jpg",
+  "/sticky-notes/note-6.jpg",
+  "/sticky-notes/note-6.jpg",
+  "/sticky-notes/note-6.jpg",
+  "/sticky-notes/note-6.jpg",
+  "/sticky-notes/note-6.jpg",
+];
