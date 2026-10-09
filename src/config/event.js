@@ -99,3 +99,18 @@ export const STICKY_NOTES = [
   "/sticky-notes/note-6.jpg",
   "/sticky-notes/note-6.jpg",
 ];
+
+// ---------------------------------------------------------------------------
+// GALLERY: photos and videos in the order they hang on the rope.
+// `caption` is optional (small text under the card).
+// ---------------------------------------------------------------------------
+export const GALLERY = [
+  { type: "image", src: "/gallery/photo-1.jpg", caption: "Opening" },
+  { type: "image", src: "/gallery/photo-2.jpg", caption: "Team check-in" },
+  { type: "video", src: "/gallery/clip-1.mp4", caption: "Build time" },
+  { type: "image", src: "/gallery/photo-3.jpg" },
+  { type: "image", src: "/gallery/photo-4.jpg" },
+  { type: "video", src: "/gallery/clip-2.mp4" },
+  { type: "image", src: "/gallery/photo-5.jpg" },
+  { type: "image", src: "/gallery/photo-6.jpg" },
+];

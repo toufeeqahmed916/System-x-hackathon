@@ -18,6 +18,7 @@ export default function Header() {
             ["Winners", "#winners"],
             ["Timeline", "#how-it-works"],
             ["FAQ", "#faq"],
+            ["Gallery", "#gallery"],
           ].map(([label, href]) => (
             <a
               key={href}
@@ -26,8 +27,12 @@ export default function Header() {
             >
               {label}
             </a>
+            
           ))}
         </nav>
+        <a href="#gallery" className="btn-primary !px-5 !py-2.5 !text-sm">
+  Gallery
+</a>
       </div>
     </header>
   );

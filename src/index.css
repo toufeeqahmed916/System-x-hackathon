@@ -73,6 +73,20 @@
   .eyebrow {
     @apply font-mono text-xs md:text-sm tracking-[0.2em] text-lime;
   }
+    /* Hanging gallery card: tilted on the rope, swings straight on hover */
+  .hang-card {
+    transform: rotate(var(--tilt, 0deg));
+    transform-origin: 50% 0;
+    transition: transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 200ms ease, border-color 200ms ease;
+    box-shadow: 6px 6px 0 0 rgba(198, 255, 0, 0.35);
+  }
+  .hang-card:hover,
+  .hang-card:focus-visible {
+    transform: rotate(calc(var(--slope, 0deg) * -1)) scale(1.08) translateY(6px);
+    border-color: #c6ff00;
+    box-shadow: 6px 6px 0 0 #c6ff00;
+  }
 }
 
 @layer utilities {
