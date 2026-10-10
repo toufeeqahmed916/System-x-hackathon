@@ -26,7 +26,7 @@ export default function App() {
         <HowItWorks />
         <Judges />
         <Gallery />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <FAQ />
       </main>
       <Footer />

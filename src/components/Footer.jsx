@@ -56,7 +56,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <p className="container-x py-5 font-mono text-xs text-white/60">
-          © {new Date().getFullYear()} {EVENT.name}. Organized by 24CS (Sec-1).
+          © {new Date().getFullYear()} {EVENT.name}. Organized by 24CS.
         </p>
       </div>
     </footer>

@@ -5,7 +5,7 @@ const STEPS = [
   ["01", "Registration", "Teams of 2 to 4 signed up through a Google Form."],
   ["02", "Hackathon day", "Teams received the challenge brief and built for 6 hours."],
   ["03", "Judging", "The panel reviewed every submission."],
-  ["04", "Top 5 presented", "Shortlisted teams pitched live to the judges."],
+  ["04", "Top 8 presented", "Shortlisted teams pitched live to the judges."],
   ["05", "Top 3 awarded", "Winners were announced and prizes handed out on the spot."],
 ];
 

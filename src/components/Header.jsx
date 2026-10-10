@@ -6,7 +6,7 @@ const LINKS = [
   ["About", "#about"],
   ["Judges", "#judges"],
   ["Gallery", "#gallery"],
-  ["Reviews", "#reviews"],
+  // ["Reviews", "#reviews"],
   ["FAQ", "#faq"],
 ];
 

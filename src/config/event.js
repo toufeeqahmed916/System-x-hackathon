@@ -86,12 +86,10 @@ export const STICKY_NOTES = [
 // (a still image shown before the video loads, saves mobile data).
 // ---------------------------------------------------------------------------
 export const GALLERY = [
-  { type: "image", src: "/gallery/photo-1.jpg", caption: "Opening" },
-  { type: "image", src: "/gallery/photo-2.jpg", caption: "Team check-in" },
-  { type: "video", src: "/gallery/clip-1.mp4", caption: "Build time" },
-  { type: "image", src: "/gallery/photo-3.jpg" },
-  { type: "image", src: "/gallery/photo-4.jpg" },
-  { type: "video", src: "/gallery/clip-2.mp4" },
-  { type: "image", src: "/gallery/photo-5.jpg" },
-  { type: "image", src: "/gallery/photo-6.jpg" },
+  { type: "image", src: "/gallery/1.jpg" },
+  { type: "image", src: "/gallery/2.jpg" },
+  { type: "image", src: "/gallery/3.jpg" },
+  { type: "image", src: "/gallery/4.jpg" },
+  { type: "image", src: "/gallery/5.jpg" },
+  { type: "image", src: "/gallery/6.jpg" },
 ];
