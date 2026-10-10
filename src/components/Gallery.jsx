@@ -3,7 +3,7 @@ import Section from "./Section";
 import { GALLERY } from "../config/event";
 
 const TILTS = ["-3deg", "2deg", "-1.5deg", "3deg", "-2deg", "1deg"];
-const SPEED = 40; // pixels per second, moving right to left
+const SPEED = 150; // pixels per second, moving right to left
 const FOLLOW = 0.6; // how strongly cards tilt along the rope (0 = hang straight)
 
 // Sizes for phone vs desktop. `sag` is how far the rope dips in the middle.
