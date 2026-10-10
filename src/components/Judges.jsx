@@ -1,43 +1,43 @@
 import Reveal from "./Reveal";
+import Section from "./Section";
 
 const JUDGES = [
-  { name: "Dr. Fawad Mangi", title: "Assistant Professor", photo: "/images/judge-1.png" },
-  { name: "Dr. Zartasha Baloch", title: "Assistant Professor", photo: "/images/judge-2.png" },
-  { name: "Dr. Ali Asghar", title: "Assistant Professor", photo: "/images/judge-3.png" },
-  { name: "Engr. Madeha Memon", title: "Lecturer", photo: "/images/judge-4.png" },
+  { name: "Dr. Fawad Mangi", title: "Assistant Professor", photo: "/images/judge-1.webp" },
+  { name: "Dr. Zartasha Baloch", title: "Assistant Professor", photo: "/images/judge-2.webp" },
+  { name: "Dr. Ali Asghar", title: "Assistant Professor", photo: "/images/judge-3.webp" },
+  { name: "Engr. Madeha Memon", title: "Lecturer", photo: "/images/judge-4.webp" },
 ];
 
 export default function Judges() {
   return (
-    <section className="border-b-[3px] border-lime bg-surface">
-      <div className="px-mobile-margin md:px-desktop-margin py-16 md:py-24 max-w-7xl mx-auto">
-        <Reveal>
-          <span className="eyebrow">// on the panel</span>
-          <h2 className="section-title mt-3 mb-10 md:mb-14">Judges</h2>
-        </Reveal>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {JUDGES.map((judge, i) => (
-            <Reveal key={judge.name} delay={i * 0.06}>
-              <div className="border-[3px] border-lime/60 bg-black flex flex-col overflow-hidden">
-                <div className="aspect-square overflow-hidden">
+    <Section id="judges" label="Panel" title="Judges" tone="alt">
+      <ul className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+        {JUDGES.map((judge, i) => (
+          <li key={judge.name}>
+            <Reveal delay={i * 0.06} className="h-full">
+              <article className="flex h-full flex-col border-2 border-white/15 bg-background">
+                <div className="aspect-[3/4] overflow-hidden bg-surface">
                   <img
                     src={judge.photo}
-                    alt={judge.name}
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                    alt={`${judge.name}, ${judge.title}`}
+                    width="600"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover object-top"
                   />
                 </div>
-                <div className="p-3 md:p-4 text-center border-t-[3px] border-lime/60">
-                  <p className="font-display font-bold text-sm md:text-base uppercase">{judge.name}</p>
-                  <p className="font-mono text-[10px] md:text-xs text-white/50 uppercase tracking-wide mt-1">
-                    {judge.title}
-                  </p>
+                <div className="border-t-2 border-white/15 p-3 md:p-4">
+                  <h3 className="font-display text-sm font-bold uppercase leading-tight md:text-base">
+                    {judge.name}
+                  </h3>
+                  <p className="mt-1 font-mono text-xs uppercase tracking-wide text-white/60">{judge.title}</p>
                 </div>
-              </div>
+              </article>
             </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
+          </li>
+        ))}
+      </ul>
+    </Section>
   );
 }

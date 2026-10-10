@@ -1,6 +1,5 @@
 // ---------------------------------------------------------------------------
-// EVENT CONFIG — edit this file when the date, venue, form link, or prizes
-// are confirmed. Nothing else in the codebase needs to change.
+// EVENT CONFIG: all the content you edit lives in this one file.
 // ---------------------------------------------------------------------------
 
 export const EVENT = {
@@ -8,27 +7,16 @@ export const EVENT = {
   organizer: "Computer Systems",
   tagline: "Create. Collaborate. Conquer.",
   durationHours: 6,
-  teamSize: "2 - 4",
-  registrationFee: "Rs. 2,000 / team",
-
-  // Set this to the confirmed ISO date-time once announced, e.g. "2026-11-14T09:00:00+05:00".
-  // While this is null, the countdown shows a "TBA" state instead of counting down.
-  eventDateISO: "2020-01-01T00:00:00+05:00",
-
-  venue: "Science & Technology Park, Muet Jamshoro",
-
-  // Swap in the real Google Form link + generate a QR that points to it.
-  registrationFormUrl: "https://forms.gle/zut2vbALbq6bfTp86",
+  teamSize: "2-4",
+  dateLabel: "1 October 2026", // confirm this is the correct event date
+  venue: "Science & Technology Park, MUET Jamshoro",
 
   socials: {
     instagram: "https://www.instagram.com/systemxhackathon?igsi=MWhldGprYzJ5aGR3cA==",
     linkedin: "https://www.linkedin.com/company/systemxhackathon/",
   },
 
-  // Prize amounts stay blurred/pixelated with a "Reveal Soon" tag until you're ready.
-  // Flip `revealed` to true (or set individual amounts) when you want to unblur them.
   prizes: {
-    revealed: true,
     first: "Rs. 10,000",
     second: "Rs. 6,000",
     third: "Rs. 4,000",
@@ -36,8 +24,9 @@ export const EVENT = {
 };
 
 // ---------------------------------------------------------------------------
-// WINNERS — fill in real team names, members, photo filenames and demo links.
-// Keep the order: 1st, 2nd, 3rd.
+// WINNERS: keep the order 1st, 2nd, 3rd.
+// photoPosition controls which part of a wide photo stays visible when it is
+// cropped to fit the card (CSS object-position, e.g. "50% 30%").
 // ---------------------------------------------------------------------------
 export const WINNERS = [
   {
@@ -46,6 +35,7 @@ export const WINNERS = [
     teamName: "Claude's Plan",
     members: ["Umer Qureshi", "Musab Khan", "Oun Jaffri", "Hunain Shaikh"],
     photo: "/winners/1st.jpg",
+    photoPosition: "50% 40%",
     demoUrl: "https://bedgrid-six.vercel.app/",
   },
   {
@@ -54,6 +44,7 @@ export const WINNERS = [
     teamName: "Code Crusaders",
     members: ["Syed Sayeel Abbas", "Ahmed Memon", "Rasool Bux", "Haroon Zulifqar"],
     photo: "/winners/2nd.jpg",
+    photoPosition: "50% 35%",
     demoUrl: "https://smart-campus-network-monitoring.netlify.app/",
   },
   {
@@ -61,28 +52,24 @@ export const WINNERS = [
     prize: EVENT.prizes.third,
     teamName: "Lahooti X",
     members: ["Amjad", "Naveed", "Muhammad Azan"],
-    photo: "/winners/3rd.JPG",
+    photo: "/winners/3rd.jpg", // renamed from 3rd.JPG (lowercase is safer on Netlify)
+    photoPosition: "50% 40%",
     demoUrl: "https://queueflow10.vercel.app/",
   },
 ];
 
 // ---------------------------------------------------------------------------
-// TESTIMONIALS: typed reviews, one entry per team. Write the real text here.
+// TESTIMONIALS: typed reviews, one entry per team. REPLACE the placeholder
+// text and team names below with the real ones before you deploy.
 // ---------------------------------------------------------------------------
 export const TESTIMONIALS = [
-  { team: "Claudes PLan", text: "Type the review exactly as the team wrote it." },
+  { team: "Claude's Plan", text: "Type the review exactly as the team wrote it." },
   { team: "Yaqeen", text: "Type the review exactly as the team wrote it." },
-  { team: "bakri", text: "Type the review exactly as the team wrote it." },
-  { team: "bakri", text: "Type the review exactly as the team wrote it." },
-  { team: "bakri", text: "Type the review exactly as the team wrote it." },
-  { team: "bakri", text: "Type the review exactly as the team wrote it." },
-  { team: "bakri", text: "Type the review exactly as the team wrote it." },
-  { team: "bakri", text: "Type the review exactly as the team wrote it." },
-  { team: "bakri", text: "Type the review exactly as the team wrote it." },
+  { team: "Team name", text: "Type the review exactly as the team wrote it." },
 ];
 
 // ---------------------------------------------------------------------------
-// STICKY_NOTES: anonymous note photos, no names. Just the file paths.
+// STICKY_NOTES: anonymous note photos. One path per file in public/sticky-notes/
 // ---------------------------------------------------------------------------
 export const STICKY_NOTES = [
   "/sticky-notes/note-1.jpg",
@@ -91,18 +78,12 @@ export const STICKY_NOTES = [
   "/sticky-notes/note-4.jpg",
   "/sticky-notes/note-5.jpg",
   "/sticky-notes/note-6.jpg",
-  "/sticky-notes/note-6.jpg",
-  "/sticky-notes/note-6.jpg",
-  "/sticky-notes/note-6.jpg",
-  "/sticky-notes/note-6.jpg",
-  "/sticky-notes/note-6.jpg",
-  "/sticky-notes/note-6.jpg",
-  "/sticky-notes/note-6.jpg",
 ];
 
 // ---------------------------------------------------------------------------
 // GALLERY: photos and videos in the order they hang on the rope.
-// `caption` is optional (small text under the card).
+// caption is optional. For videos you can add poster: "/gallery/clip-1.jpg"
+// (a still image shown before the video loads, saves mobile data).
 // ---------------------------------------------------------------------------
 export const GALLERY = [
   { type: "image", src: "/gallery/photo-1.jpg", caption: "Opening" },

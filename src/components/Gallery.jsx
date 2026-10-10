@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import Reveal from "./Reveal";
+import Section from "./Section";
 import { GALLERY } from "../config/event";
 
 const TILTS = ["-3deg", "2deg", "-1.5deg", "3deg", "-2deg", "1deg"];
@@ -58,11 +58,12 @@ function GalleryCard({ item, tilt, onOpen }) {
             <video
               ref={videoRef}
               src={`${item.src}#t=0.1`}
+              poster={item.poster}
               className="w-full h-full object-cover"
               muted
               loop
               playsInline
-              preload="metadata"
+              preload={item.poster ? "none" : "metadata"}
             />
             <span className="absolute top-2 left-2 bg-lime text-black font-mono font-bold text-[10px] px-1.5 py-0.5 border-2 border-black">
               VIDEO
@@ -74,12 +75,13 @@ function GalleryCard({ item, tilt, onOpen }) {
             alt={item.caption || "Hackathon photo"}
             className="w-full h-full object-cover"
             loading="lazy"
+            decoding="async"
             draggable={false}
           />
         )}
       </div>
 
-      <p className="h-8 pt-2 px-1 font-mono text-[10px] md:text-xs uppercase tracking-wide text-white/70 truncate">
+      <p className="h-8 pt-2 px-1 font-mono text-xs uppercase tracking-wide text-white/70 truncate">
         {item.caption || ""}
       </p>
     </button>
@@ -89,6 +91,23 @@ function GalleryCard({ item, tilt, onOpen }) {
 function Lightbox({ items, index, onClose, onChange }) {
   const item = items[index];
   const total = items.length;
+  const closeRef = useRef(null);
+  const touchStartX = useRef(null);
+
+  // Move focus into the viewer, and give it back to the card when it closes.
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    closeRef.current?.focus();
+    return () => previouslyFocused?.focus?.();
+  }, []);
+
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(dx) < 50) return;
+    onChange(dx < 0 ? (index + 1) % total : (index - 1 + total) % total);
+  };
 
   useEffect(() => {
     const onKey = (e) => {
@@ -109,8 +128,11 @@ function Lightbox({ items, index, onClose, onChange }) {
     <div
       className="fixed inset-0 z-[1000] bg-black/95 flex items-center justify-center p-4 md:p-8"
       onClick={onClose}
+      onTouchStart={(e) => (touchStartX.current = e.touches[0].clientX)}
+      onTouchEnd={onTouchEnd}
       role="dialog"
       aria-modal="true"
+      aria-label="Gallery viewer"
     >
       <div
         className="w-full max-w-5xl flex flex-col items-center"
@@ -158,7 +180,7 @@ function Lightbox({ items, index, onClose, onChange }) {
           >
             →
           </button>
-          <button onClick={onClose} className="btn-primary !px-5 !py-2 !text-sm ml-2">
+          <button ref={closeRef} onClick={onClose} className="btn-primary !px-5 !py-2 !text-sm ml-2">
             Close
           </button>
         </div>
@@ -174,10 +196,12 @@ export default function Gallery() {
   const itemRefs = useRef([]);
   const offsetRef = useRef(0);
   const pausedRef = useRef(false);
+  const visibleRef = useRef(true);
   const dragRef = useRef({ active: false, lastX: 0, moved: 0 });
   const close = useCallback(() => setOpen(null), []);
 
   const layout = getLayout(width || 1200);
+  const { pitch, cardW, sag, top } = layout;
 
   // Repeat the photos until the rope is long enough to never show a gap.
   const need = Math.ceil((width || 1200) / layout.pitch) + 3;
@@ -197,10 +221,20 @@ export default function Gallery() {
     return () => observer.disconnect();
   }, []);
 
+  // Remember whether the gallery is on screen so the loop can idle when it is not.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      visibleRef.current = entry.isIntersecting;
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   // Move the cards along the curved rope, every frame.
   useEffect(() => {
     if (!width || cards.length === 0) return;
-    const { pitch, cardW, sag, top } = layout;
     const n = cards.length;
     const total = n * pitch;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -225,6 +259,10 @@ export default function Gallery() {
     const tick = (now) => {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
+      if (!visibleRef.current) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
       if (!pausedRef.current && !dragRef.current.active && !reduceMotion) {
         offsetRef.current += SPEED * dt;
       }
@@ -233,7 +271,7 @@ export default function Gallery() {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [width, cards.length, layout.pitch, layout.cardW, layout.sag, layout.top]);
+  }, [width, cards.length, pitch, cardW, sag, top]);
 
   // Drag the rope by hand (touch or mouse).
   const onPointerDown = (e) => {
@@ -263,17 +301,17 @@ export default function Gallery() {
   if (GALLERY.length === 0) return null;
 
   return (
-    <section id="gallery" className="border-b-[3px] border-lime bg-surface overflow-hidden">
-      <div className="py-16 md:py-24">
-        <div className="px-mobile-margin md:px-desktop-margin max-w-7xl mx-auto text-center">
-          <Reveal>
-            <span className="eyebrow">// on the day</span>
-            <h2 className="section-title mt-3 mb-4">Gallery</h2>
-            <p className="font-mono text-xs md:text-sm text-white/50 mb-10 md:mb-14">
-              Hover to pause, drag to move, click any card to open it full screen.
-            </p>
-          </Reveal>
-        </div>
+    <>
+      <Section
+        id="gallery"
+        label="On the day"
+        title="Gallery"
+        align="center"
+        bleed
+      >
+        <p className="-mt-6 mb-10 px-5 text-center font-mono text-xs text-white/60 md:-mt-8 md:mb-14 md:text-sm">
+          Drag the rope to move it. Click or tap a card to open it full screen.
+        </p>
 
         <div
           ref={containerRef}
@@ -325,11 +363,11 @@ export default function Gallery() {
               </div>
             ))}
         </div>
-      </div>
+      </Section>
 
       {open !== null && (
         <Lightbox items={GALLERY} index={open} onClose={close} onChange={setOpen} />
       )}
-    </section>
+    </>
   );
 }

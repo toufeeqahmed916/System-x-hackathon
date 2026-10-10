@@ -1,47 +1,39 @@
-import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "../lib/gsap";
+import { useEffect, useRef, useState } from "react";
 
 /**
- * Wraps children and animates them in as they scroll into view.
- * direction: "up" | "left" | "right" | "none"
+ * Fades its children in once, the first time they scroll into view.
+ * Plain IntersectionObserver + CSS, no animation library needed.
  */
-export default function Reveal({ children, direction = "up", delay = 0, className = "" }) {
+export default function Reveal({ children, delay = 0, className = "" }) {
   const ref = useRef(null);
+  // Browsers without IntersectionObserver just show everything immediately.
+  const [shown, setShown] = useState(
+    () => typeof window !== "undefined" && !("IntersectionObserver" in window)
+  );
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
-    const from = { opacity: 0 };
-    if (direction === "up") from.y = 40;
-    if (direction === "left") from.x = -60;
-    if (direction === "right") from.x = 60;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        from,
-        {
-          opacity: 1,
-          x: 0,
-          y: 0,
-          duration: 0.8,
-          delay,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
+    if (!("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true);
+          observer.disconnect();
         }
-      );
-    }, ref);
-
-    return () => ctx.revert();
-  }, [direction, delay]);
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div ref={ref} className={className}>
+    <div
+      ref={ref}
+      className={`reveal ${shown ? "is-visible" : ""} ${className}`}
+      style={delay ? { transitionDelay: `${delay}s` } : undefined}
+    >
       {children}
     </div>
   );

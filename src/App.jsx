@@ -1,35 +1,35 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import About from "./components/About";
-import Perks from "./components/Perks";
-import HowItWorks from "./components/HowItWorks";
 import Winners from "./components/Winners";
+import About from "./components/About";
+import HowItWorks from "./components/HowItWorks";
 import Judges from "./components/Judges";
-import Testimonials from "./components/Testimonials";
-import StickyNotes from "./components/StickyNotes";
 import Gallery from "./components/Gallery";
+import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
-import CursorFollow from "./components/CursorFollow";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
-      <CursorFollow />
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[1100] focus:bg-lime focus:px-4 focus:py-2 focus:font-bold focus:text-black"
+      >
+        Skip to content
+      </a>
       <Header />
-      <main>
+      <main id="main">
         <Hero />
-        <About />
         <Winners />
-        <Perks />
+        <About />
         <HowItWorks />
         <Judges />
+        <Gallery />
         <Testimonials />
-<StickyNotes />
-<Gallery />
         <FAQ />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

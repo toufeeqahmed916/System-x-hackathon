@@ -1,4 +1,3 @@
-import Reveal from "./Reveal";
 import { STICKY_NOTES } from "../config/event";
 
 const TILTS = ["-rotate-2", "rotate-1", "rotate-2", "-rotate-1"];
@@ -22,22 +21,27 @@ function MarqueeRow({ notes, toRight, duration }) {
         } hover:[animation-play-state:paused] motion-reduce:animate-none`}
         style={{ animationDuration: duration }}
       >
-        {items.map((src, i) => (
-          <div
-            key={i}
-            className={`shrink-0 mr-5 md:mr-8 bg-black border-[3px] border-lime/60 p-2 ${
-              TILTS[(i % base.length) % TILTS.length]
-            }`}
-            style={{ boxShadow: "5px 5px 0 0 rgba(198,255,0,0.4)" }}
-          >
-            <img
-              src={src}
-              alt="Anonymous note from a participant"
-              className="h-44 md:h-60 w-auto object-contain"
-              draggable={false}
-            />
-          </div>
-        ))}
+        {items.map((src, i) => {
+          const isCopy = i >= base.length; // the second copy is decoration only
+          return (
+            <div
+              key={i}
+              aria-hidden={isCopy || undefined}
+              className={`mr-5 shrink-0 border-2 border-white/20 bg-black p-2 md:mr-8 ${
+                TILTS[(i % base.length) % TILTS.length]
+              }`}
+            >
+              <img
+                src={src}
+                alt={isCopy ? "" : "Anonymous note from a participant"}
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+                className="h-44 w-auto object-contain md:h-60"
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -50,20 +54,18 @@ export default function StickyNotes() {
   const bottom = STICKY_NOTES.filter((_, i) => i % 2 === 1);
 
   return (
-    <section id="notes" className="border-b-[3px] border-lime overflow-hidden">
-      <div className="py-16 md:py-24">
-        <div className="px-mobile-margin md:px-desktop-margin max-w-7xl mx-auto">
-          <Reveal>
-            <span className="eyebrow">// no names</span>
-            <h2 className="section-title mt-3 mb-10 md:mb-14">Anonymous notes</h2>
-          </Reveal>
-        </div>
-
-        <div className="flex flex-col gap-4 md:gap-6">
-          <MarqueeRow notes={top} toRight duration="60s" />
-          {bottom.length > 0 && <MarqueeRow notes={bottom} duration="70s" />}
-        </div>
+    <div className="mt-16 md:mt-24">
+      <div className="container-x mb-6">
+        <h3 className="font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
+          Anonymous notes
+        </h3>
+        <p className="mt-2 text-white/70">Unsigned notes from participants.</p>
       </div>
-    </section>
+
+      <div className="flex flex-col gap-2 md:gap-4">
+        <MarqueeRow notes={top} toRight duration="70s" />
+        {bottom.length > 0 && <MarqueeRow notes={bottom} duration="80s" />}
+      </div>
+    </div>
   );
 }

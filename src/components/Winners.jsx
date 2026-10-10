@@ -1,44 +1,46 @@
 import Reveal from "./Reveal";
+import Section from "./Section";
 import { WINNERS } from "../config/event";
 
-function WinnerCard({ winner, featured }) {
+function Photo({ winner, className = "" }) {
   return (
-    <div
-      className={`flex flex-col gap-4 p-5 md:p-6 border-[3px] h-full ${
-        featured ? "bg-black border-lime md:-translate-y-4" : "bg-surface border-lime/50"
-      }`}
-      style={{
-        boxShadow: featured ? "8px 8px 0 0 #C6FF00" : "6px 6px 0 0 rgba(198,255,0,0.4)",
-      }}
-    >
-      <div className="aspect-[4/3] w-full overflow-hidden border-[3px] border-lime/40 bg-black">
-        <img
-          src={winner.photo}
-          alt={`${winner.teamName} receiving ${winner.place}`}
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <div className={`relative overflow-hidden bg-surface ${className}`}>
+      <img
+        src={winner.photo}
+        alt={`${winner.teamName} receiving ${winner.place} at System X Hackathon 1.0`}
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: winner.photoPosition || "50% 50%" }}
+      />
+    </div>
+  );
+}
 
+function Details({ winner, featured }) {
+  return (
+    <div className="flex flex-1 flex-col gap-4 p-5 md:p-7">
       <div>
-        <div className="flex items-center gap-2">
-          {featured && <span className="text-xl">🏆</span>}
-          <span
-            className={`font-mono text-xs tracking-widest uppercase ${
-              featured ? "text-lime" : "text-white/60"
-            }`}
-          >
-            {winner.place}
-          </span>
-        </div>
-        <h3 className="font-display font-bold text-xl md:text-2xl uppercase mt-1">
+        <p
+          className={`inline-block px-2 py-1 font-mono text-xs font-bold uppercase tracking-widest ${
+            featured ? "bg-lime text-black" : "border border-white/30 text-white/80"
+          }`}
+        >
+          {winner.place}
+        </p>
+        <h3
+          className={`mt-3 font-display font-bold uppercase leading-none tracking-tight ${
+            featured ? "text-3xl md:text-4xl" : "text-2xl"
+          }`}
+        >
           {winner.teamName}
         </h3>
-        <p className="font-mono font-bold text-lime text-sm mt-1">{winner.prize}</p>
+        <p className="mt-2 font-mono text-sm font-bold text-lime">{winner.prize}</p>
       </div>
 
-      <ul className="font-mono text-xs md:text-sm text-white/70 space-y-1">
+      <ul className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-sm text-white/75">
         {winner.members.map((name) => (
-          <li key={name}>— {name}</li>
+          <li key={name}>{name}</li>
         ))}
       </ul>
 
@@ -47,9 +49,10 @@ function WinnerCard({ winner, featured }) {
           href={winner.demoUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-secondary !px-4 !py-2 !text-xs mt-auto self-start"
+          aria-label={`Open the ${winner.teamName} live demo (opens in a new tab)`}
+          className="btn-secondary mt-auto !min-h-[40px] self-start !px-4 !py-2 !text-sm"
         >
-          View Live Demo →
+          Live demo ↗
         </a>
       )}
     </div>
@@ -57,28 +60,34 @@ function WinnerCard({ winner, featured }) {
 }
 
 export default function Winners() {
-  const [first, second, third] = WINNERS;
+  const [first, ...others] = WINNERS;
 
   return (
-    <section id="winners" className="border-b-[3px] border-lime">
-      <div className="px-mobile-margin md:px-desktop-margin py-16 md:py-24 max-w-7xl mx-auto">
+    <Section id="winners" label="Results" title="Top 3 teams">
+      <div className="grid gap-6 md:gap-8">
         <Reveal>
-          <span className="eyebrow">// the winners</span>
-          <h2 className="section-title mt-3 mb-10 md:mb-14">Top 3 Teams</h2>
+          <article
+            className="grid border-2 border-lime bg-black md:grid-cols-5"
+            style={{ boxShadow: "8px 8px 0 0 #C6FF00" }}
+          >
+            <Photo winner={first} className="aspect-[16/10] md:col-span-3 md:aspect-auto md:min-h-[380px]" />
+            <div className="flex md:col-span-2">
+              <Details winner={first} featured />
+            </div>
+          </article>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          <Reveal delay={0.05} className="order-2 md:order-1">
-            <WinnerCard winner={second} />
-          </Reveal>
-          <Reveal delay={0.15} className="order-1 md:order-2">
-            <WinnerCard winner={first} featured />
-          </Reveal>
-          <Reveal delay={0.1} className="order-3">
-            <WinnerCard winner={third} />
-          </Reveal>
+        <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+          {others.map((winner, i) => (
+            <Reveal key={winner.teamName} delay={i * 0.08}>
+              <article className="flex h-full flex-col border-2 border-white/15 bg-surface transition-colors hover:border-lime">
+                <Photo winner={winner} className="aspect-[16/10]" />
+                <Details winner={winner} />
+              </article>
+            </Reveal>
+          ))}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
