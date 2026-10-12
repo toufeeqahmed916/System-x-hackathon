@@ -72,12 +72,23 @@ export const TESTIMONIALS = [
 // STICKY_NOTES: anonymous note photos. One path per file in public/sticky-notes/
 // ---------------------------------------------------------------------------
 export const STICKY_NOTES = [
-  "/sticky-notes/note-1.jpg",
-  "/sticky-notes/note-2.jpg",
-  "/sticky-notes/note-3.jpg",
-  "/sticky-notes/note-4.jpg",
-  "/sticky-notes/note-5.jpg",
-  "/sticky-notes/note-6.jpg",
+  "/sticky-notes/1.jpg",
+"/sticky-notes/2.jpg",
+"/sticky-notes/3.jpg",
+"/sticky-notes/4.jpg",
+"/sticky-notes/5.jpg",
+"/sticky-notes/6.jpg",
+"/sticky-notes/7.jpg",
+"/sticky-notes/8.jpg",
+"/sticky-notes/9.jpg",
+"/sticky-notes/10.jpg",
+"/sticky-notes/11.jpg",
+"/sticky-notes/12.jpg",
+"/sticky-notes/13.jpg",
+"/sticky-notes/14.jpg",
+"/sticky-notes/15.jpg",
+"/sticky-notes/16.jpg",
+"/sticky-notes/17.jpg",
 ];
 
 // ---------------------------------------------------------------------------
